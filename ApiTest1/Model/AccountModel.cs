@@ -2,7 +2,7 @@
 
 namespace ApiTest1.Model
 {
-    public class AccountModel
+    public class Account
     {
         public int id { get; set; }
         public string Name { get; set; }
