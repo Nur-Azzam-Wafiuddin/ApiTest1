@@ -9,5 +9,6 @@ namespace ApiTest1.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         public DbSet<Product> Products { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<ProductHistory> ProductHistories { get; set; }
     }
 }

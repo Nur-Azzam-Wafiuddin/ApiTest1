@@ -18,13 +18,13 @@ namespace ApiTest1.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Account>>> Get()
         {
-            return Ok(await dataContext.Accounts.ToArrayAsync());
+            return Ok(await dataContext.Accounts.Include(e => e.productHistory).ToArrayAsync());
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<List<Account>>> GetbyId(int id)
         {
-            var Account = await dataContext.Accounts.FindAsync(id);
+            var Account = await dataContext.Accounts.Include(e => e.productHistory).SingleOrDefaultAsync(p => p.id == id); //.FindAsync(id)
             if (Account == null)
             {
                 return BadRequest("Account not found");
@@ -37,14 +37,14 @@ namespace ApiTest1.Controllers
         {
             dataContext.Accounts.Add(Account);
             await dataContext.SaveChangesAsync();
-            return Ok(await dataContext.Accounts.ToListAsync());
+            return Ok(await dataContext.Accounts.Include(e => e.productHistory).ToListAsync());
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<List<Account>>> UpdateAccountbyId(Account Account, int id)
         {
-            var updateAccount = await dataContext.Accounts.FindAsync(id);
-            if (Account == null)
+            var updateAccount = await dataContext.Accounts.Include(e => e.productHistory).SingleOrDefaultAsync(p => p.id == id);
+            if (updateAccount == null)
             {
                 return BadRequest("Account not found");
             }
@@ -52,16 +52,17 @@ namespace ApiTest1.Controllers
             updateAccount.Name = Account.Name;
             updateAccount.username = Account.username;
             updateAccount.password = Account.password;
+            updateAccount.productHistory = Account.productHistory;
 
             await dataContext.SaveChangesAsync();
 
-            return Ok(await dataContext.Accounts.ToListAsync());
+            return Ok(await dataContext.Accounts.Include(e => e.productHistory).ToListAsync());
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<Account>>> DeletebyId(int id)
         {
-            var deleteAccount = await dataContext.Accounts.FindAsync(id);
+            var deleteAccount = await dataContext.Accounts.Include(e => e.productHistory).SingleOrDefaultAsync(p => p.id == id);
             if (deleteAccount == null)
             {
                 return BadRequest("Account not found");
@@ -69,7 +70,7 @@ namespace ApiTest1.Controllers
             dataContext.Accounts.Remove(deleteAccount);
             await dataContext.SaveChangesAsync();
 
-            return Ok(await dataContext.Accounts.ToListAsync());
+            return Ok(await dataContext.Accounts.Include(e => e.productHistory).ToListAsync());
         }
     }
 }
