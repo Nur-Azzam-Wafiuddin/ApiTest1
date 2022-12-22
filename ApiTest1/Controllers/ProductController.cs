@@ -49,7 +49,7 @@ namespace ApiTest1.Controllers
                 return BadRequest("Product not found");
             }
 
-            updateProduct.Name = product.Name;
+            updateProduct.name = product.name;
             updateProduct.isAvailable = product.isAvailable;
 
             await dataContext.SaveChangesAsync();

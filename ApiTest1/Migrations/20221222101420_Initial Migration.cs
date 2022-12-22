@@ -16,7 +16,7 @@ namespace ApiTest1.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     password = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -31,7 +31,7 @@ namespace ApiTest1.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     isAvailable = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -45,8 +45,10 @@ namespace ApiTest1.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    borrowState = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    approval = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    borrowPeriodStart = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    borrowPeriodEnd = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Accountid = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

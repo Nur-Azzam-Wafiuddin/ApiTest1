@@ -49,7 +49,7 @@ namespace ApiTest1.Controllers
                 return BadRequest("Account not found");
             }
 
-            updateAccount.Name = Account.Name;
+            updateAccount.name = Account.name;
             updateAccount.username = Account.username;
             updateAccount.password = Account.password;
             updateAccount.productHistory = Account.productHistory;
