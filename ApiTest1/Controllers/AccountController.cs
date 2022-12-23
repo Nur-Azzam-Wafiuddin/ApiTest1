@@ -54,6 +54,14 @@ namespace ApiTest1.Controllers
             updateAccount.password = Account.password;
             updateAccount.productHistory = Account.productHistory;
 
+            foreach(ProductHistory deleteUnusedProduct in dataContext.ProductHistories)
+            {
+                if(deleteUnusedProduct.accountId == null)
+                {
+                    dataContext.ProductHistories.Remove(deleteUnusedProduct);
+                }
+            }
+
             await dataContext.SaveChangesAsync();
 
             return Ok(await dataContext.Accounts.Include(e => e.productHistory).ToListAsync());

@@ -47,24 +47,24 @@ namespace ApiTest1.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     approval = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    borrowPeriodStart = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    borrowPeriodEnd = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Accountid = table.Column<int>(type: "int", nullable: true)
+                    borrowDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    accountId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProductHistories", x => x.id);
                     table.ForeignKey(
-                        name: "FK_ProductHistories_Accounts_Accountid",
-                        column: x => x.Accountid,
+                        name: "FK_ProductHistories_Accounts_accountId",
+                        column: x => x.accountId,
                         principalTable: "Accounts",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductHistories_Accountid",
+                name: "IX_ProductHistories_accountId",
                 table: "ProductHistories",
-                column: "Accountid");
+                column: "accountId");
         }
 
         /// <inheritdoc />
